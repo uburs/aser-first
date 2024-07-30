@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry Quiz</title>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f9f9f9;
+            overflow-x: hidden; /* Prevent horizontal overflow */
+        }
+        .container {
+            display: none; /* Hide all containers by default */
+            flex-direction: column;
+            align-items: center;
+            text-align: left;
+            min-height: 80vh;
+            width: 100%; /* Full width to prevent overflow */
+            margin: 0 30px;
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+        .container.active {
+            display: flex; /* Show only the active container */
+        }
+        .container p {
+            margin: 0;
+            text-align: left;
+        }
+        .nav-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+        }
+        .nav-buttons button {
+            color: tomato;
+            width: 200px;
+            height: 50px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .complete-survey-button {
+            width: 250px;
+            height: 60px;
+            font-size: 18px;
+            background-color: #800000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        video {
+            max-width: 100%;
+            height: auto;
+            align-self: center;
+        }
+        h1, h3 {
+            text-align: center;
+            font-weight: bold;
+            color: #800000;
+        }
+        .quiz-container {
+            margin-top: 20px;
+            text-align: left;
+            width: 100%;
+            max-width: 600px;
+        }
+        .quiz-question {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="video-section-1" class="container active">
+        <h1>Chemistry Lecture Video</h1>
+        <p>This recorded video is just an example demonstrating a real-time lecture in a Chemistry class. </p>
+        <p>The idea is to demonstrate how some students need an accessibility support to be able to participate in the class.</p>
+        <div>
+            <figure>
+                <video width="900" height="800" controls>
+                    <source src="images/matter.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </figure>
+        </div>
+        <h2>You will access the real-time caption for this video lecture in the next page.</h2>
+        <div class="nav-buttons">
+            <button onclick="showPage(1)">Next</button>
+        </div>
+    </div>
+    
+    <div id="video-section-2" class="container">
+        <h1>ASR Captions of the Lecture Video Shown in Previous Page</h1>
+        <div>
+            <figure>
+                <video width="900" height="800" controls>
+                    <source src="images/matterTranscript.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </figure>
+        </div>
+
+        <div class="nav-buttons">
+            <button onclick="showPage(0)">Previous</button>
+            <button onclick="showPage(2)">Next</button>
+        </div>
+    </div>
+
+    
+    <div id="quiz-section" class="container">
+        <h1>Quiz</h1>
+        <p>The following quiz is based on the content covered in the lecture video on page 1 and the corresponding caption on page 2.</p>
+        <p>The purpose of the quiz is to determine comprehension.</p>
+        <div class="quiz-container">
+            <div class="quiz-question">
+                <p>1. Matter is composed of a tiny unit called?</p>
+                <label><input type="radio" name="question1" value="Particle"> Particle</label><br>
+                <label><input type="radio" name="question1" value="Electron"> Electron</label><br>
+                <label><input type="radio" name="question1" value="Atom"> Atom</label><br>
+                <label><input type="radio" name="question1" value="Proton"> Proton</label>
+            </div>
+            <div class="quiz-question">
+                <p>2. Which of the following is an example of matter?</p>
+                <label><input type="radio" name="question2" value="water"> happiness</label><br>
+                <label><input type="radio" name="question2" value="electricity"> excitement</label><br>
+                <label><input type="radio" name="question2" value="proton"> water</label><br>
+                <label><input type="radio" name="question2" value="neoro"> space</label>
+            </div>
+            <button class="complete-survey-button" onclick="submitResponses()">Submit</button>
+        </div>
+        <div class="nav-buttons">
+            <!--button onclick="showPage(1)">Previous</!--button-->
+            <button onclick="location.href='https://virginiatech.questionpro.com/study1'">Begin Study 1 Survey</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for Navigation and Submission -->
+    <script>
+        function showPage(pageIndex) {
+            console.log("Button clicked, showing page:", pageIndex);
+            const sections = document.querySelectorAll('.container');
+            sections.forEach((section, index) => {
+                if (index === pageIndex) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+        }
+
+        function showPage(pageIndex) {
+        console.log("Button clicked, showing page:", pageIndex);
+        const sections = document.querySelectorAll('.container');
+        sections.forEach((section, index) => {
+            if (index === pageIndex) {
+                section.classList.add('active');
+            } else {
+                section.classList.remove('active');
+            }
+        });
+    }
+
+    function submitResponses() {
+    const responses = {
+        question1: document.querySelector('input[name="question1"]:checked')?.value,
+        question2: document.querySelector('input[name="question2"]:checked')?.value
+    };
+
+    fetch('submit_responses.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(responses)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert(data.message);
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        alert('An error occurred: ' + error.message);
+    });
+}
+    </script>
+</body>
+</html>
