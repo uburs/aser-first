@@ -134,10 +134,10 @@
             </div>
             <div class="quiz-question">
                 <p>2. Which of the following is an example of matter?</p>
-                <label><input type="radio" name="question2" value="happiness"> happiness</label><br>
-                <label><input type="radio" name="question2" value="excitement"> excitement</label><br>
-                <label><input type="radio" name="question2" value="water"> water</label><br>
-                <label><input type="radio" name="question2" value="space"> space</label>
+                <label><input type="radio" name="question2" value="happiness"> Happiness</label><br>
+                <label><input type="radio" name="question2" value="excitement"> Excitement</label><br>
+                <label><input type="radio" name="question2" value="water"> Water</label><br>
+                <label><input type="radio" name="question2" value="space"> Space</label>
             </div>
             <!--button class="complete-survey-button" onclick="submitResponses()">Submit</!--button>   -->
         </div>
@@ -183,17 +183,17 @@
                 if (response.ok) {
                     const result = await response.json();
                     if (result.status === 'success') {
-                        alert(result.message);
+                        //alert(result.message);
                         window.location.href = 'https://virginiatech.questionpro.com/study1';
                     } else {
-                        alert(`There was an error submitting your responses. Please try again. Error: ${result.message}`);
+                        //alert(`There was an error submitting your responses. Please try again. Error: ${result.message}`);
                     }
                 } else {
                     const responseBody = await response.text();
-                    alert(`There was an error submitting your responses. Please try again. Response: ${responseBody}`);
+                    //alert(`There was an error submitting your responses. Please try again. Response: ${responseBody}`);
                 }
             } catch (error) {
-                alert(`There was an error submitting your responses. Please try again. Error: ${error.message}`);
+                //alert(`There was an error submitting your responses. Please try again. Error: ${error.message}`);
             }
         }
     </script>
