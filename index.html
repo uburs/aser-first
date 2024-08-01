@@ -139,7 +139,7 @@
             <button class="complete-survey-button" onclick="submitResponses()">Submit</button>
         </div>
         <div class="nav-buttons">
-            <button id="beginSurveyButton" onclick="submitAndRedirect()">Begin Study 1 Survey</button>
+            <button id="beginSurveyButton" onclick="submitResponses()">Begin Study 1 Survey</button>
         </div>
     </div>
 
@@ -192,10 +192,6 @@
             } catch (error) {
                 alert(`There was an error submitting your responses. Please try again. Error: ${error.message}`);
             }
-        }
-
-        function submitAndRedirect() {
-            submitResponses();
         }
     </script>
 </body>
