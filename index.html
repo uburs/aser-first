@@ -14,9 +14,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Center content vertically */
             background-color: #f9f9f9;
-            min-height: 100vh; /* Full viewport height */
             overflow-x: hidden; /* Prevent horizontal overflow */
         }
         .container {
@@ -79,38 +77,11 @@
         .quiz-question {
             margin-bottom: 15px;
         }
-        .welcome-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            max-width: 800px;
-            margin-bottom: 20px;
-            text-align: left;
-            font-size: 18px;
-            line-height: 1.5;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #ffffff;
-            border-radius: 8px;
-        }
-        .welcome-container h1 {
-            text-align: center;
-        }
-        .welcome-container h2,
-        .welcome-container h3 {
-            text-align: left;
-        }
-        .welcome-container img {
-            max-width: 100%;
-            height: auto;
-            margin: 20px 0;
-        }
         .play-button-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 20px;
+            height: 100vh;
         }
         .play-button {
             padding: 10px 20px;
@@ -120,6 +91,10 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+        }
+        .welcome-container img {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
