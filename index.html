@@ -199,18 +199,24 @@
 
         window.onload = () => {
             const video1 = document.getElementById('video1');
-            if (video1) {
-                video1.volume = 0.20; // Set the volume to 20% for video1
-                video1.play().catch(error => console.log('Error attempting to play video1:', error));
-            }
             const video2 = document.getElementById('video2');
+
+            function playVideo(videoElement) {
+                videoElement.volume = 0.20;
+                videoElement.play().catch(error => console.log('Error attempting to play video:', error));
+            }
+
+            if (video1) {
+                playVideo(video1);
+            }
+
             if (video2) {
-                video2.volume = 0.0; // Set the volume to 0% for video2
-                video2.play().catch(error => console.log('Error attempting to play video2:', error));
+                playVideo(video2);
             }
         };
     </script>
 </body>
 </html>
+
 
 
