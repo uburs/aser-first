@@ -14,7 +14,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center; /* Center content vertically */
             background-color: #f9f9f9;
+            min-height: 100vh; /* Full viewport height */
             overflow-x: hidden; /* Prevent horizontal overflow */
         }
         .container {
@@ -77,11 +79,27 @@
         .quiz-question {
             margin-bottom: 15px;
         }
+        .welcome-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 8px;
+        }
+        .welcome-container img {
+            max-width: 80%;
+            height: auto;
+            margin: 20px 0;
+        }
         .play-button-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            margin-top: 20px;
         }
         .play-button {
             padding: 10px 20px;
@@ -91,10 +109,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-        }
-        .welcome-container img {
-            max-width: 100%;
-            height: auto;
         }
     </style>
 </head>
@@ -107,7 +121,7 @@
         <p>After watching the video and reading the corresponding caption, you will conclude with a comprehension quiz on the lecture experience and a survey.</p>
         <img src="/mnt/data/image.png" alt="Welcome Image">
         <div class="play-button-container">
-            <button class="play-button" onclick="startExperience()">Begin Study 1</button>
+            <button class="play-button" onclick="startExperience()">Start Study 1</button>
         </div>
     </div>
 
