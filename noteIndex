@@ -87,13 +87,14 @@
         <p>The idea is to demonstrate how some students need an accessibility support to be able to participate in the class.</p>
         <div>
             <figure>
-                <video width="900" height="800" controls>
+                <video width="900" height="800" controls autoplay muted>
                     <source src="images/matter.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </figure>
         </div>
-        <h2>You will access the real-time caption for this video lecture in the next page.</h2>
+        <h3>You will access the real-time caption for this video lecture in the next page.</h3>
+        <h2 style="font-weight: bold; color: green;">Please WATCH the whole video before proceeding to the next page</h2>
         <div class="nav-buttons">
             <button onclick="showPage(1)">Next</button>
         </div>
@@ -103,15 +104,17 @@
         <h1>ASR Captions of the Lecture Video Shown in Previous Page</h1>
         <div>
             <figure>
-                <video width="900" height="800" controls>
+                <video width="900" height="800" controls autoplay muted>
                     <source src="images/matterTranscript.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </figure>
         </div>
 
+        <h2 style="font-weight: bold; color: green;">Please READ the whole transcript before proceeding to the next page</h2>
+
         <div class="nav-buttons">
-            <button onclick="showPage(0)">Previous</button>
+            <button onclick="showPage(0)">Previous</button>    
             <button onclick="showPage(2)">Next</button>
         </div>
     </div>
@@ -131,16 +134,15 @@
             </div>
             <div class="quiz-question">
                 <p>2. Which of the following is an example of matter?</p>
-                <label><input type="radio" name="question2" value="water"> happiness</label><br>
-                <label><input type="radio" name="question2" value="electricity"> excitement</label><br>
-                <label><input type="radio" name="question2" value="proton"> water</label><br>
-                <label><input type="radio" name="question2" value="neoro"> space</label>
+                <label><input type="radio" name="question2" value="happiness"> Happiness</label><br>
+                <label><input type="radio" name="question2" value="excitement"> Excitement</label><br>
+                <label><input type="radio" name="question2" value="water"> Water</label><br>
+                <label><input type="radio" name="question2" value="space"> Space</label>
             </div>
-            <button class="complete-survey-button" onclick="submitResponses()">Submit</button>
+            <!--button class="complete-survey-button" onclick="submitResponses()">Submit</!--button>   -->
         </div>
         <div class="nav-buttons">
-            <!--button onclick="showPage(1)">Previous</!--button-->
-            <button onclick="location.href='https://virginiatech.questionpro.com/study1'">Begin Study 1 Survey</button>
+            <button id="beginSurveyButton" onclick="submitResponses()">Begin Study 1 Survey</button>
         </div>
     </div>
 
@@ -158,43 +160,43 @@
             });
         }
 
-        function showPage(pageIndex) {
-        console.log("Button clicked, showing page:", pageIndex);
-        const sections = document.querySelectorAll('.container');
-        sections.forEach((section, index) => {
-            if (index === pageIndex) {
-                section.classList.add('active');
-            } else {
-                section.classList.remove('active');
+        async function submitResponses() {
+            const quiz1Response = document.querySelector('input[name="question1"]:checked') ? document.querySelector('input[name="question1"]:checked').value : "No response";
+            const quiz2Response = document.querySelector('input[name="question2"]:checked') ? document.querySelector('input[name="question2"]:checked').value : "No response";
+            const email = 'sundavid7740@gmail.com'; // Or get the email from a form field
+
+            const responses = {
+                email: email,
+                q1: quiz1Response,
+                q2: quiz2Response
+            };
+
+            try {
+                const response = await fetch('submit_responses.php', {
+                    method: 'POST',
+                    body: JSON.stringify(responses),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.status === 'success') {
+                        //alert(result.message);
+                        window.location.href = 'https://virginiatech.questionpro.com/study1';
+                    } else {
+                        //alert(`There was an error submitting your responses. Please try again. Error: ${result.message}`);
+                    }
+                } else {
+                    const responseBody = await response.text();
+                    //alert(`There was an error submitting your responses. Please try again. Response: ${responseBody}`);
+                }
+            } catch (error) {
+                //alert(`There was an error submitting your responses. Please try again. Error: ${error.message}`);
             }
-        });
-    }
-
-    function submitResponses() {
-    const responses = {
-        question1: document.querySelector('input[name="question1"]:checked')?.value,
-        question2: document.querySelector('input[name="question2"]:checked')?.value
-    };
-
-    fetch('submit_responses.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(responses)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            alert(data.message);
-        } else {
-            alert(data.message);
         }
-    })
-    .catch(error => {
-        alert('An error occurred: ' + error.message);
-    });
-}
     </script>
 </body>
 </html>
+

@@ -87,7 +87,7 @@
         <p>The idea is to demonstrate how some students need an accessibility support to be able to participate in the class.</p>
         <div>
             <figure>
-                <video width="900" height="800" controls autoplay muted>
+                <video id="video1" width="900" height="800" controls autoplay muted>
                     <source src="images/matter.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -104,7 +104,7 @@
         <h1>ASR Captions of the Lecture Video Shown in Previous Page</h1>
         <div>
             <figure>
-                <video width="900" height="800" controls autoplay muted>
+                <video id="video2" width="900" height="800" controls autoplay muted>
                     <source src="images/matterTranscript.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -196,6 +196,17 @@
                 //alert(`There was an error submitting your responses. Please try again. Error: ${error.message}`);
             }
         }
+
+        window.onload = () => {
+            const video1 = document.getElementById('video1');
+            if (video1) {
+                video1.volume = 0.20; // Set the volume to 35% for video1
+            }
+            const video2 = document.getElementById('video2');
+            if (video2) {
+                video2.volume = 0.0; // Set the volume to 35% for video2
+            }
+        };
     </script>
 </body>
 </html>
