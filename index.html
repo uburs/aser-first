@@ -77,16 +77,35 @@
         .quiz-question {
             margin-bottom: 15px;
         }
+        .play-button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .play-button {
+            padding: 10px 20px;
+            font-size: 20px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <div id="video-section-1" class="container active">
+    <div id="play-button-container" class="play-button-container">
+        <button class="play-button" onclick="startExperience()">Start Experience</button>
+    </div>
+
+    <div id="video-section-1" class="container">
         <h1>Chemistry Lecture Video</h1>
         <p>This recorded video is just an example demonstrating a real-time lecture in a Chemistry class.</p>
         <p>The idea is to demonstrate how some students need accessibility support to be able to participate in the class.</p>
         <div>
             <figure>
-                <video id="video1" width="900" height="800" controls autoplay>
+                <video id="video1" width="900" height="800" controls>
                     <source src="images/matter.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -103,7 +122,7 @@
         <h1>ASR Captions of the Lecture Video Shown in the Previous Page</h1>
         <div>
             <figure>
-                <video id="video2" width="900" height="800" controls autoplay>
+                <video id="video2" width="900" height="800" controls>
                     <source src="images/matterTranscript.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -144,6 +163,13 @@
     </div>
 
     <script>
+        function startExperience() {
+            document.getElementById('play-button-container').style.display = 'none';
+            document.getElementById('video-section-1').classList.add('active');
+            const video1 = document.getElementById('video1');
+            video1.play();
+        }
+
         function showPage(pageIndex) {
             console.log("Button clicked, showing page:", pageIndex);
             const sections = document.querySelectorAll('.container');
@@ -154,6 +180,10 @@
                     section.classList.remove('active');
                 }
             });
+            const video2 = document.getElementById('video2');
+            if (pageIndex === 1 && video2) {
+                video2.play();
+            }
         }
 
         async function submitResponses() {
@@ -191,17 +221,6 @@
                 console.error(`Error submitting responses: ${error.message}`);
             }
         }
-
-        window.onload = () => {
-            const video1 = document.getElementById('video1');
-            if (video1) {
-                video1.volume = 0.20; // Set the volume to 20% for video1
-            }
-            const video2 = document.getElementById('video2');
-            if (video2) {
-                video2.volume = 0.20; // Set the volume to 20% for video2
-            }
-        };
     </script>
 </body>
 </html>
