@@ -116,7 +116,7 @@
         <h2>Here, you will perform the following activities:</h2>
     <div id="rectangular-container">
         <h3>First, you will watch a lecture video that simulates a classroom experience.<br>
-            Secondly, you will watch a recording of the corresponding automatic speech transcription (ASR) captions of the video.<br>
+            Second, you will watch a recording of the corresponding automatic speech transcription (ASR) captions of the video.<br>
             After viewing the video and reading the captions, you will complete a comprehension quiz and a survey on the lecture experience.</h3>
      </div>
         <div class="play-button-container">
@@ -139,7 +139,7 @@
         <h3>You will access the real-time caption for this video lecture on the next page.</h3>
         <h2 style="font-weight: bold; color: green;">Please WATCH the whole video before proceeding to the next page</h2>
         <div class="nav-buttons">
-            <button onclick="showPage(2)">Next</button>
+            <button id="nextButton1" disabled onclick="showPage(2)">Next</button>
         </div>
     </div>
     
@@ -158,10 +158,10 @@
 
         <div class="nav-buttons">
             <button onclick="showPage(1)">Previous</button>    
-        <!--    <button onclick="showPage(3)">Next</button>  -->
+            <button id="nextButton2" disabled onclick="showPage(3)">Next</button>
         </div>
     </div>
-<!--
+
     <div id="quiz-section" class="container">
         <h1>Quiz</h1>
         <p>The following quiz is based on the content covered in the lecture video on page 1 and the corresponding caption on page 2.</p>
@@ -181,7 +181,7 @@
                 <label><input type="radio" name="question2" value="water"> Water</label><br>
                 <label><input type="radio" name="question2" value="space"> Space</label>
             </div>
-        </div>  -->
+        </div>
         <div class="nav-buttons">
             <button id="beginSurveyButton" onclick="submitResponses()">Begin Study 1 Survey</button>
         </div>
@@ -193,6 +193,10 @@
             document.getElementById('video-section-1').classList.add('active');
             const video1 = document.getElementById('video1');
             video1.play();
+
+            video1.addEventListener('ended', () => {
+                document.getElementById('nextButton1').disabled = false;
+            });
         }
 
         function showPage(pageIndex) {
@@ -208,6 +212,10 @@
             const video2 = document.getElementById('video2');
             if (pageIndex === 2 && video2) {
                 video2.play();
+
+                video2.addEventListener('ended', () => {
+                    document.getElementById('nextButton2').disabled = false;
+                });
             }
         }
 
