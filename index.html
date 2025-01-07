@@ -195,41 +195,18 @@
             }
         }
 
-        async function submitResponses() {
-            const quiz1Response = document.querySelector('input[name="question1"]:checked') ? document.querySelector('input[name="question1"]:checked').value : "No response";
-            const quiz2Response = document.querySelector('input[name="question2"]:checked') ? document.querySelector('input[name="question2"]:checked').value : "No response";
-            const email = 'sundavid7740@gmail.com'; // Or get the email from a form field
+        function submitResponses() {
+    // Collect responses if needed (this can be extended to read from the page)
+    const quiz1Response = document.querySelector('input[name="question1"]:checked') ? document.querySelector('input[name="question1"]:checked').value : "No response";
+    const quiz2Response = document.querySelector('input[name="question2"]:checked') ? document.querySelector('input[name="question2"]:checked').value : "No response";
 
-            const responses = {
-                email: email,
-                q1: quiz1Response,
-                q2: quiz2Response
-            };
+    // Log the responses for debugging or potential local use
+    console.log("Responses collected:", { q1: quiz1Response, q2: quiz2Response });
 
-            try {
-                const response = await fetch('submit_responses.php', {
-                    method: 'POST',
-                    body: JSON.stringify(responses),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
+    // Redirect to the survey link
+    window.location.href = 'https://virginiatech.questionpro.com/study1';
+}
 
-                if (response.ok) {
-                    const result = await response.json();
-                    if (result.status === 'success') {
-                        window.location.href = 'https://virginiatech.questionpro.com/study1';
-                    } else {
-                        console.error(`Error submitting responses: ${result.message}`);
-                    }
-                } else {
-                    const responseBody = await response.text();
-                    console.error(`Error submitting responses: ${responseBody}`);
-                }
-            } catch (error) {
-                console.error(`Error submitting responses: ${error.message}`);
-            }
-        }
 
         // Disable right-click on video elements
         document.getElementById('video1').addEventListener('contextmenu', (e) => e.preventDefault());
